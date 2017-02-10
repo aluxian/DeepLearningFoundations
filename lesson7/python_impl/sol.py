@@ -39,10 +39,10 @@ for e in range(epochs):
         error = y - sigmoid(output)
 
         # TODO: Calculate error gradient in output unit
-        output_error = error * sigmoidPrime(output)
+        output_error = error * sigmoidPrime(output) # delta1
 
         # TODO: propagate errors to hidden layer
-        hidden_error = np.dot(output_error, W2) * sigmoidPrime(z2)
+        hidden_error = np.dot(output_error, W2) * sigmoidPrime(z2) # delta2
 
         # TODO: Update the change in weights
         del_w_hidden_output += output_error * hidden_activations
