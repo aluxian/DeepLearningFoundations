@@ -11,7 +11,7 @@ def sigmoid(x):
 
 
 # Hyperparameters
-n_hidden = 2  # number of hidden units
+n_hidden = 3  # number of hidden units
 epochs = 900
 learnrate = 0.005
 
@@ -32,8 +32,7 @@ for e in range(epochs):
         hidden_input = np.dot(x, weights_input_hidden)
         hidden_output = sigmoid(hidden_input)
 
-        output = sigmoid(np.dot(hidden_output,
-                                weights_hidden_output))
+        output = sigmoid(np.dot(hidden_output, weights_hidden_output))
 
         ## Backward pass ##
         # TODO: Calculate the error
@@ -43,11 +42,15 @@ for e in range(epochs):
         output_error = error * output * (1 - output)
 
         # TODO: propagate errors to hidden layer
-        hidden_error = np.dot(output_error, weights_hidden_output) * \
-                       hidden_output * (1 - hidden_output)
+        hidden_error = np.dot(output_error, weights_hidden_output) * hidden_output * (1 - hidden_output)
 
         # TODO: Update the change in weights
+        print("xxxx1")
+        print(str(del_w_hidden_output.shape) + " += " + str(output_error.shape) + " * " + str(hidden_output.shape))
         del_w_hidden_output += output_error * hidden_output
+        print((output_error * hidden_output).shape)
+        print(str(del_w_input_hidden.shape) + " += " + str(hidden_error.shape) + " * " + str(x[:, None].shape))
+        print((hidden_error * x[:, None]).shape)
         del_w_input_hidden += hidden_error * x[:, None]
 
     # TODO: Update weights

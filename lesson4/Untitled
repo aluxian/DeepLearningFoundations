@@ -1,0 +1,36 @@
+Nobody likes to pay bills for their car insurance, especially when they're only using it once in a while. Furthermore, insurance rates are increasing because of other people's negligence: more careful drivers have to pay the same amount of money as drivers with a more aggressive driving style (thus, more likely to crash their car).
+
+STOP!
+
+Together with Volvo and Bosch, we introduce a new platform called Insure Ride. The platform allows Volvo drivers to profit from personalized insurance rates which are based on the driving behaviour. In addition, the insurance only charges when the car has actually been driven.
+
+In short, InsureRide brings following value:
+- Brings potential cost-saving to certain customer groups
+- Encourages people to drive eco-friendly
+- Changes the driving patterns by using gamification
+
+
+
+The Bosch XDK is a programmable sensor device. We use it as an IoT device to record acceleration (and breaking) and speed during driving. The beacon sends every 100 miliseconds the recorded data to the python server over wifi via UDP.
+
+
+The python server receives the packages and stores them in memory until the drive is completed. When the drive completed, the different metrics are calculated using various algorithms. The metrics are then send via REST to the backend.
+In case a camera is installed in the car, the python server also performs facial recognition to identify the driver and improve the profiling.
+
+The backend is written in Go. When data from a drive is pushed to the backend, it stores all data in form of a smart contract in the Ethereum blockchain. The smart contract contans all business logic. The user pre-pays some money in the contract. When the contract gets some data from a new drive, it calculates the costs for the insurance and pays the amount directly to the insurance company.
+When the the frontend requests to data from the backend, its looks up the contracts in the blockchain and sends it as a response to the frontend.
+
+The frontend displays all the data. Beside a list of all routes, it also give recommendations how the customer can improve its driving style to increase safety on the street and reduce CO2-Emissions.
+
+
+Used API:
+Frontend;
+Google Maps
+Skype API (to directly call the insurance)
+
+Backend:
+https://min-api.cryptocompare.com/ (To calculate the exchange rate CHF / Ether)
+
+Sensors:
+XDK from Bosch
+OpenCV / Dlib for facial recognition
